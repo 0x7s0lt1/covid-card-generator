@@ -1,4 +1,4 @@
-let scene,camera,renderer,controls,exporter,card,plane_front,plane_back;
+let scene,camera,renderer,textureLoader,controls,exporter,card,plane_front,plane_back;
 
 import * as THREE from 'https://cdn.skypack.dev/three@';
 import { OrbitControls } from 'https://cdn.skypack.dev/pin/three@v0.131.3-QQa34rwf1xM5cawaQLl8/mode=imports,min/unoptimized/examples/jsm/controls/OrbitControls.js';
@@ -29,30 +29,45 @@ function init(){
 
     card = new THREE.Object3D();
 
-    var Ftexture = new THREE.Texture(document.getElementById('result'));
-    var Btexture = new THREE.TextureLoader().load( './assets/card/back.png' );
+    
+    textureLoader = new THREE.TextureLoader();
 
-    document.getElementById('result').onload = () =>  { Ftexture.needsUpdate = true };
+    //document.getElementById('result').onload = () =>  { Ftexture.needsUpdate = true };
 
 
-    window.makeCard3D = async function (){
+    window.makeCard3D = function (){
 
 
         const geometry = new THREE.BoxGeometry( 6.5, 4.5, 0.01 );
 
-        plane_front = new THREE.Mesh( 
-            geometry,
-            new THREE.MeshBasicMaterial( { map: Ftexture,side: THREE.FrontSide,transparent: true} ));
-        plane_back = new THREE.Mesh( 
-            geometry, 
-            new THREE.MeshBasicMaterial( { map: Btexture ,side : THREE.BackSide,transparent: true} ) );
+        textureLoader.load( './assets/card/back.png',(Btexture) =>{
 
-        plane_back.position.z -= 0.015;
+            textureLoader.load(document.getElementById('result').src,(Ftexture)=>{
 
-        await card.add( plane_front );
-        await card.add( plane_back );
-        await scene.add(card);
+                plane_front = new THREE.Mesh( 
+                    geometry,
+                    new THREE.MeshBasicMaterial( { map: Ftexture,side: THREE.FrontSide,transparent: true} ));
+                plane_back = new THREE.Mesh( 
+                    geometry, 
+                    new THREE.MeshBasicMaterial( { map: Btexture ,side : THREE.BackSide,transparent: true} ) );
+        
+                plane_back.position.z -= 0.015;
+        
+                card.add( plane_front );
+                card.add( plane_back );
+                scene.add(card);
 
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('h').innerText = "You're virtually vaccinated.";
+        
+    
+            });
+    
+
+        });
+
+        
+        
         function save( blob, filename ) {
 
             link.href = URL.createObjectURL( blob );
@@ -83,8 +98,6 @@ function init(){
             } );
 
         }
-
-        return 0;
 
     }
 

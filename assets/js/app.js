@@ -21,6 +21,7 @@ App = {
         App.canvas.width = App.card_front.naturalWidth;
         App.canvas.height = App.card_front.naturalHeight;
 
+        
         App.ctx.drawImage(App.card_front, 0, 0);
         App.ctx.font = "70px Arial";
 
@@ -151,24 +152,19 @@ App = {
         App.three_canvas.style.display = 'block';
         App.result_container.style.display = 'block';
 
-        window.makeCard3D()
-        .then(()=>{
+        document.getElementById('link').href = "https://zsoltfehervari.xyz/public/covid-card/covid-card.php?"+App.form_data.uuid;
+        document.getElementById('result_d').href = window.card;
+        document.getElementById('result_d').download = App.form_data.fname + "_covidcard.png";
+        document.getElementById('link').innerText = "Where the QR code pointing?";
 
-            document.getElementById('link').href = "https://zsoltfehervari.xyz/public/covid-card/covid-card.php?"+App.form_data.uuid;
-            document.getElementById('result_d').href = window.card;
-            document.getElementById('result_d').download = App.form_data.fname + "_covidcard.png";
-            document.getElementById('link').innerText = "Where the QR code pointing?";
-            App.loading.style.display = 'none';
-            App.l_header.innerText = "You're virtually vaccinated.";
+        window.makeCard3D();
+      
+            //App.loading.style.display = 'none';
+            //App.l_header.innerText = "You're virtually vaccinated.";
 
-        });
-
-        
-
-
-
+    
     }
 
 }
 
-window.addEventListener('DOMContentLoaded',App.init,false);
+window.addEventListener('load',App.init,false);
