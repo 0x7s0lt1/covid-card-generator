@@ -1,1 +1,1 @@
-# fake-hungarian-immunityCertificate-generator
+# covid-card-generator
