@@ -1,6 +1,6 @@
 <?php
 
-$allowed = array('https://zsoltfehervari.xyz','http://localhost');
+$allowed = array('https://zsoltfehervari.dev','http://localhost');
 
 if( isset($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'],$allowed) ){
 

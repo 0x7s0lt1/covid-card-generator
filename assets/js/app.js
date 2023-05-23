@@ -51,14 +51,14 @@ App = {
             height: 200,
             colorLight : "#dce0e8",
             colordark: "#212422",
-            text : "https://zsoltfehervari.xyz/public/covid-card/covid-card.php?"+data.uuid,
+            text : "https://zsoltfehervari.dev/public/covid-card/covid-card.php?"+data.uuid,
             });
 
         let qq = await  new QRCode(document.getElementById("qr_online"),{
             width: 200,
             height: 200,
             colordark: "#212422",
-            text : "https://zsoltfehervari.xyz/public/covid-card/covid-card.php?"+data.uuid,
+            text : "https://zsoltfehervari.dev/public/covid-card/covid-card.php?"+data.uuid,
             });
 
             //let im = await new Image();
@@ -152,7 +152,7 @@ App = {
         App.three_canvas.style.display = 'block';
         App.result_container.style.display = 'block';
 
-        document.getElementById('link').href = "https://zsoltfehervari.xyz/public/covid-card/covid-card.php?"+App.form_data.uuid;
+        document.getElementById('link').href = "https://zsoltfehervari.dev/public/covid-card/covid-card.php?"+App.form_data.uuid;
         document.getElementById('result_d').href = window.card;
         document.getElementById('result_d').download = App.form_data.fname + "_covidcard.png";
         document.getElementById('link').innerText = "Where the QR code pointing?";
